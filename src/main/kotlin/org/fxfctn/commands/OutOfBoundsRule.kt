@@ -4,6 +4,8 @@ import org.fxfctn.uobject.UObjectInterface
 
 class OutOfBoundsRule(
     private val target: UObjectInterface,
+    private val playgroundInitX: Int,
+    private val playgroundInitY: Int,
     private val width: Int,
     private val height: Int,
     private val command: CommandInterface
@@ -13,7 +15,12 @@ class OutOfBoundsRule(
         val y = target["y"] as Float
         val radius = target["radius"] as Int
 
-        if (x < radius || y < radius || x > width - radius || y > height - radius) {
+        if (
+            x < playgroundInitX + radius ||
+            y < playgroundInitY + radius ||
+            x > width - radius ||
+            y > height - radius
+        ) {
             command.execute()
         }
     }

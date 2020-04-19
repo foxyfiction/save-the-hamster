@@ -54,6 +54,9 @@ class ApplicationAdapter : KtxApplicationAdapter {
     }
     private fun draw() {
         clearScreen(0f, 0f, 0f, 0f)
+
+        DrawPlaygroundBoundsCommand(renderer).execute()
+
         val isFinished = gameState["isFinished"] as Boolean
 
         if (isFinished) {

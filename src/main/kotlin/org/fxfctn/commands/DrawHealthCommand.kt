@@ -12,12 +12,29 @@ class DrawHealthCommand(
     private val color: Color
 ): CommandInterface {
     override fun execute() {
+        val size = 10f
         renderer.use(ShapeRenderer.ShapeType.Filled) {
             renderer.color = color
             val health: Int = target["health"] as Int
             val percents = health.toFloat() / Configuration.MAX_PLAYER_HEALTH
-            val width = Configuration.SCREEN_WIDTH * percents
-            renderer.rect(0f, 0f, width, 10f)
+            val width = Configuration.PLAYGROUND_WIDTH * percents
+
+            renderer.rect(
+                Configuration.PLAYGROUND_OFFSET_Y.toFloat(),
+                Configuration.PLAYGROUND_OFFSET_Y.toFloat() - size,
+                width,
+                size
+            )
+        }
+        renderer.use(ShapeRenderer.ShapeType.Line) {
+            renderer.color = Color.WHITE
+
+            renderer.rect(
+                Configuration.PLAYGROUND_OFFSET_Y.toFloat(),
+                Configuration.PLAYGROUND_OFFSET_Y.toFloat() - size,
+                Configuration.PLAYGROUND_WIDTH.toFloat(),
+                size
+            )
         }
     }
 }

@@ -1,7 +1,5 @@
 package org.fxfctn.commands
 
-import org.fxfctn.uobject.UObject
-import org.fxfctn.commands.CreateEntityCommand
 import org.fxfctn.Configuration
 import org.fxfctn.uobject.UObjectInterface
 
@@ -13,8 +11,8 @@ class InitializeGameCommand(private val gameState: UObjectInterface): CommandInt
         gameState["isFinished"] = false
 
         val playerProps = mapOf(
-            "x" to (Configuration.SCREEN_WIDTH / 2).toFloat(),
-            "y" to (Configuration.SCREEN_HEIGHT / 2).toFloat(),
+            "x" to (Configuration.PLAYGROUND_WIDTH / 2).toFloat(),
+            "y" to (Configuration.PLAYGROUND_HEIGHT / 2).toFloat(),
             "radius" to Configuration.PLAYER_RADIUS,
             "speed" to Configuration.PLAYER_SPEED,
             "health" to Configuration.PLAYER_HEALTH
@@ -24,14 +22,14 @@ class InitializeGameCommand(private val gameState: UObjectInterface): CommandInt
 
         val guardPropsList = listOf<Map<String, Any>>(
             mapOf(
-                "x" to (Configuration.SCREEN_WIDTH / 4).toFloat(),
-                "y" to (Configuration.SCREEN_HEIGHT / 4).toFloat(),
+                "x" to (Configuration.PLAYGROUND_WIDTH / 4).toFloat(),
+                "y" to (Configuration.PLAYGROUND_HEIGHT / 4).toFloat(),
                 "speed" to Configuration.GUARD_SPEED,
                 "radius" to Configuration.PLAYER_RADIUS
             ),
             mapOf(
-                "x" to (Configuration.SCREEN_WIDTH / 4 * 3).toFloat(),
-                "y" to (Configuration.SCREEN_HEIGHT / 4 * 3).toFloat(),
+                "x" to (Configuration.PLAYGROUND_WIDTH / 4 * 3).toFloat(),
+                "y" to (Configuration.PLAYGROUND_HEIGHT / 4 * 3).toFloat(),
                 "radius" to Configuration.PLAYER_RADIUS,
                 "speed" to Configuration.GUARD_SPEED
             )

@@ -34,8 +34,10 @@ class ManageGuardsCommand(private val gameState: UObjectInterface): CommandInter
             val revertMoveCommand = MoveCommand(guard,-4 * deltaX,-2 * deltaY)
             val outOfBoundRule = OutOfBoundsRule(
                 guard,
-                Configuration.SCREEN_WIDTH,
-                Configuration.SCREEN_HEIGHT,
+                Configuration.PLAYGROUND_OFFSET_X,
+                Configuration.PLAYGROUND_OFFSET_Y,
+                Configuration.PLAYGROUND_WIDTH + Configuration.PLAYGROUND_OFFSET_X,
+                Configuration.PLAYGROUND_HEIGHT + Configuration.PLAYGROUND_OFFSET_Y,
                 revertMoveCommand
             )
             commandsList.add(outOfBoundRule)

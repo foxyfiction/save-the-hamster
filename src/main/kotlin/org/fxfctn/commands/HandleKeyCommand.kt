@@ -25,8 +25,10 @@ class HandleKeyCommand(
             (-1 * yDirection * speed).toFloat())
         val outOfBoundRule = OutOfBoundsRule(
             player,
-            Configuration.SCREEN_WIDTH,
-            Configuration.SCREEN_HEIGHT,
+            Configuration.PLAYGROUND_OFFSET_X,
+            Configuration.PLAYGROUND_OFFSET_Y,
+            Configuration.PLAYGROUND_WIDTH + Configuration.PLAYGROUND_OFFSET_X,
+            Configuration.PLAYGROUND_HEIGHT + Configuration.PLAYGROUND_OFFSET_Y,
             revertMoveCommand
         )
         val changeHealthCommand = ChangeHealthCommand(player, deltaHealth)

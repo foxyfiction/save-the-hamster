@@ -23,7 +23,13 @@ class ManageBulletsCommand(private val gameState: UObjectInterface): CommandInte
             commandsList.add(intersectionRule)
 
             val destroyBulletCommand = DestroyEntityCommand(gameState, bullet, Configuration.BULLETS_NAME)
-            val outOfBoundsRule = OutOfBoundsRule(bullet, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT, destroyBulletCommand)
+            val outOfBoundsRule = OutOfBoundsRule(
+                bullet,
+                Configuration.PLAYGROUND_OFFSET_X,
+                Configuration.PLAYGROUND_OFFSET_Y,
+                Configuration.PLAYGROUND_WIDTH + Configuration.PLAYGROUND_OFFSET_X,
+                Configuration.PLAYGROUND_HEIGHT + Configuration.PLAYGROUND_OFFSET_Y,
+                destroyBulletCommand)
             val isExistRule = IsExistRule(bullet, outOfBoundsRule)
             commandsList.add(isExistRule)
         }
