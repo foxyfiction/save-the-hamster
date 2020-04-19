@@ -7,6 +7,7 @@ import org.fxfctn.application.ApplicationAdapter
 
 fun main() {
     val config = LwjglApplicationConfiguration().apply {
+        title = "Save The Hamster!"
         width = Configuration.SCREEN_WIDTH
         height = Configuration.SCREEN_HEIGHT
     }

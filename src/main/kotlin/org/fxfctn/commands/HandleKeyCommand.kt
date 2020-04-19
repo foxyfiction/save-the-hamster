@@ -11,8 +11,10 @@ class HandleKeyCommand(
     override fun execute() {
         val players = gameState[Configuration.PLAYERS_NAME] as MutableList<UObjectInterface>
         val player = players[0]
-        val speed = player["speed"] as Int
-        val deltaHealth = if (xDirection != 0 || yDirection != 0) Configuration.PLAYER_HEALTH_DELTA else -Configuration.PLAYER_HEALTH_DELTA
+        val speed = player["speed"] as Float
+        val increaseHealth = gameState["increaseHealth"] as Int
+        val decreaseHealth = gameState["decreaseHealth"] as Int
+        val deltaHealth = if (xDirection != 0 || yDirection != 0) increaseHealth else -decreaseHealth
 
         val moveCommand = MoveCommand(
             player,
@@ -34,6 +36,8 @@ class HandleKeyCommand(
         val changeHealthCommand = ChangeHealthCommand(player, deltaHealth)
         val finishGameCommand = FinishGameCommand(gameState)
         val emptyHealthRule = EmptyHealthRule(player, finishGameCommand)
+        val levelUpCommand = LevelUpCommand(gameState, player)
+        val fullHealthRule = FullHealthRule(player, levelUpCommand)
 
         moveCommand.execute()
         outOfBoundRule.execute()
@@ -46,5 +50,6 @@ class HandleKeyCommand(
 
         changeHealthCommand.execute()
         emptyHealthRule.execute()
+        fullHealthRule.execute()
     }
 }

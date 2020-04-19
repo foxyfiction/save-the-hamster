@@ -8,6 +8,12 @@ class InitializeGameCommand(private val gameState: UObjectInterface): CommandInt
         gameState[Configuration.PLAYERS_NAME] = mutableListOf<UObjectInterface>()
         gameState[Configuration.GUARDS_NAME] = mutableListOf<UObjectInterface>()
         gameState[Configuration.BULLETS_NAME] = mutableListOf<UObjectInterface>()
+        gameState["guardSpeed"] = Configuration.GUARD_SPEED
+        gameState["threshold"] = Configuration.THRESHOLD
+        gameState["increaseHealth"] = Configuration.PLAYER_HEALTH_DELTA
+        gameState["decreaseHealth"] = Configuration.PLAYER_HEALTH_DELTA
+        gameState["guardQuantity"] = 2
+        gameState["level"] = 0
         gameState["isFinished"] = false
 
         val playerProps = mapOf(

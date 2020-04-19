@@ -12,26 +12,26 @@ class ManageGuardsCommand(private val gameState: UObjectInterface): CommandInter
         val playerX = player["x"] as Float
         val playerY = player["y"] as Float
         val commandsList = mutableListOf<CommandInterface>()
-        val threshold = 99
+        val threshold = gameState["threshold"] as Float
 
         for (guard in guards) {
             val probability = Random.nextInt(0, 100)
             val guardX = guard["x"] as Float
             val guardY = guard["y"] as Float
-            val guardSpeed = guard["speed"] as Int
+            val guardSpeed = guard["speed"] as Float
 
             val xDirection = if (playerX > guardX) 1 else -1
             val yDirection = if (playerY > guardY) 1 else -1
 
-            if (probability >= threshold) {
+            if (probability > threshold) {
                 commandsList.add(FireBulletCommand(gameState, guard, xDirection, yDirection))
             }
 
-            val deltaX = (xDirection * guardSpeed).toFloat()
-            val deltaY = (yDirection * guardSpeed).toFloat()
+            val deltaX = xDirection * guardSpeed
+            val deltaY = yDirection * guardSpeed
 
             commandsList.add(MoveCommand(guard, deltaX, deltaY))
-            val revertMoveCommand = MoveCommand(guard,-4 * deltaX,-2 * deltaY)
+            val revertMoveCommand = MoveCommand(guard,-1 * deltaX,-1 * deltaY)
             val outOfBoundRule = OutOfBoundsRule(
                 guard,
                 Configuration.PLAYGROUND_OFFSET_X,
@@ -45,8 +45,8 @@ class ManageGuardsCommand(private val gameState: UObjectInterface): CommandInter
 
             for (otherGuard in guards) {
                 if (otherGuard != guard) {
-                    val revertNearMoveCommand = MoveCommand(guard,5 * deltaX,-5 * deltaY)
-                    commandsList.add(IntersectionRule(otherGuard, guard, revertMoveCommand))
+                    val revertNearMoveCommand = MoveCommand(guard,-1 * deltaX,-1 * deltaY)
+                    commandsList.add(IntersectionRule(otherGuard, guard, revertNearMoveCommand))
                 }
             }
         }

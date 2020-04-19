@@ -2,7 +2,9 @@ package org.fxfctn.application
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import ktx.app.KtxApplicationAdapter
 import ktx.app.clearScreen
@@ -14,11 +16,12 @@ import org.fxfctn.uobject.UObjectInterface
 
 class ApplicationAdapter : KtxApplicationAdapter {
     private lateinit var renderer: ShapeRenderer
+    private lateinit var batch: SpriteBatch
     private lateinit var gameState: UObjectInterface
-    private var guards = emptyList<UObjectInterface>()
 
     override fun create() {
         renderer = ShapeRenderer()
+        batch = SpriteBatch()
         gameState = UObject()
         InitializeGameCommand(gameState).execute()
     }
@@ -56,6 +59,7 @@ class ApplicationAdapter : KtxApplicationAdapter {
         clearScreen(0f, 0f, 0f, 0f)
 
         DrawPlaygroundBoundsCommand(renderer).execute()
+        DrawLevelIndicatorCommand(renderer, gameState).execute()
 
         val isFinished = gameState["isFinished"] as Boolean
 

@@ -21,7 +21,6 @@ class FireBulletCommand(
         val directionVector = sqrt((
                 deltaSpeedX.toFloat().pow(2) + deltaSpeedY.toFloat().pow(2)))
         val relation = radius.toFloat() / directionVector
-        println(xDirection * deltaSpeedX * relation)
         val bulletX = x + xDirection * deltaSpeedX * relation
         val bulletY = y + yDirection * deltaSpeedY * relation
         val bulletProps = mapOf<String, Any>(
