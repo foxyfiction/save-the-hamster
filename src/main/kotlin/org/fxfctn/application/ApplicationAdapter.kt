@@ -7,12 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import ktx.app.KtxApplicationAdapter
 import ktx.app.clearScreen
 
-import org.fxfctn.commands.HandleKeyCommand
-import org.fxfctn.commands.InitializeGameCommand
-import org.fxfctn.commands.DrawMemberCommand
-import org.fxfctn.commands.DrawHealthCommand
-import org.fxfctn.commands.DrawTheEndMessageCommand
 import org.fxfctn.Configuration
+import org.fxfctn.commands.*
 import org.fxfctn.uobject.UObject
 import org.fxfctn.uobject.UObjectInterface
 
@@ -53,6 +49,8 @@ class ApplicationAdapter : KtxApplicationAdapter {
         HandleKeyCommand(gameState, xDirection, yDirection).execute()
     }
     private fun logic() {
+        ManageGuardsCommand(gameState).execute()
+        ManageBulletsCommand(gameState).execute()
     }
     private fun draw() {
         clearScreen(0f, 0f, 0f, 0f)
@@ -73,6 +71,11 @@ class ApplicationAdapter : KtxApplicationAdapter {
         val guards = gameState[Configuration.GUARDS_NAME] as MutableList<UObjectInterface>
         for (guard in guards) {
             DrawMemberCommand(renderer, guard, Color.ROYAL).execute()
+        }
+
+        val bullets = gameState[Configuration.BULLETS_NAME] as MutableList<UObjectInterface>
+        for (bullet in bullets) {
+            DrawMemberCommand(renderer, bullet, Color.WHITE).execute()
         }
     }
 }

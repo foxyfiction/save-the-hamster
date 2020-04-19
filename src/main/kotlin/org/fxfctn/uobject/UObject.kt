@@ -11,13 +11,13 @@ class UObject : UObjectInterface {
     }
 
     override operator fun get(key: String): Any {
-        return map.getOrElse(key, { throw UObjectException("Property doesn't exist") })
+        return map.getOrElse(key, { throw UObjectException("Property doesn't exist $key") })
     }
 
     override fun remove(key: String) {
         if (map.containsKey(key))
             map.remove(key)
         else
-            throw UObjectException("Trying to remove nonexistent property")
+            throw UObjectException("Trying to remove nonexistent property $key")
     }
 }

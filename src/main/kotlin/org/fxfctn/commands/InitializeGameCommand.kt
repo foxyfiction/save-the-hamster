@@ -26,14 +26,14 @@ class InitializeGameCommand(private val gameState: UObjectInterface): CommandInt
             mapOf(
                 "x" to (Configuration.SCREEN_WIDTH / 4).toFloat(),
                 "y" to (Configuration.SCREEN_HEIGHT / 4).toFloat(),
-                "radius" to Configuration.PLAYER_RADIUS,
-                "speed" to 0f
+                "speed" to Configuration.GUARD_SPEED,
+                "radius" to Configuration.PLAYER_RADIUS
             ),
             mapOf(
                 "x" to (Configuration.SCREEN_WIDTH / 4 * 3).toFloat(),
                 "y" to (Configuration.SCREEN_HEIGHT / 4 * 3).toFloat(),
                 "radius" to Configuration.PLAYER_RADIUS,
-                "speed" to 0f
+                "speed" to Configuration.GUARD_SPEED
             )
         )
 

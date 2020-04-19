@@ -1,7 +1,15 @@
 package org.fxfctn.commands
 
-class DestroyEntityCommand: CommandInterface {
+import org.fxfctn.uobject.UObjectInterface
+
+class DestroyEntityCommand(
+    private val gameState: UObjectInterface,
+    private val target: UObjectInterface,
+    private val name: String
+): CommandInterface {
     override fun execute() {
-        TODO("Not yet implemented")
+        val entityList = gameState[name] as MutableList<UObjectInterface>
+
+        entityList.remove(target)
     }
 }
